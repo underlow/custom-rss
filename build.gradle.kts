@@ -38,6 +38,11 @@ tasks.withType<Jar> {
     }
 }
 
+// required for heroku deploy
+tasks.register("stage") {
+    dependsOn("shadowJar")
+}
+
 tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
