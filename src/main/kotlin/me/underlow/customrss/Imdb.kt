@@ -11,7 +11,7 @@ object Imdb {
     private fun buildUrl(userId: String) = "http://www.imdb.com/user/${userId}/ratings"
 
     private fun fetchAndParse(userId: String): List<SyndEntry> {
-        val document = Jsoup.parse(URL(buildUrl(userId)), 1)
+        val document = Jsoup.parse(URL(buildUrl(userId)), 5000)
 
         val items = document.select("#ratings-container > .lister-item")
 
