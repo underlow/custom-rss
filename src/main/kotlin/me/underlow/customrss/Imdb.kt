@@ -1,15 +1,19 @@
 package me.underlow.customrss
 
 import com.rometools.rome.feed.synd.*
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
+import kotlinx.coroutines.withTimeout
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import java.net.URL
 import java.text.SimpleDateFormat
 
 
 object Imdb {
     private fun buildUrl(userId: String) = "http://www.imdb.com/user/${userId}/ratings"
+
+    private val httpClient = HttpClient()
 
     fun fetchAndParse(userId: String, document: Document): List<SyndEntry> {
         val items = document.select("#ratings-container > .lister-item")
@@ -19,15 +23,19 @@ object Imdb {
         return items.mapNotNull { it.toSyndEntry() }
     }
 
-    fun fetch(userId: String): SyndFeed {
+    suspend fun fetch(userId: String): SyndFeed {
         logger.info("feed for $userId requested")
+
+        val html = withTimeout(10000) {
+            httpClient.get<String>(buildUrl(userId))
+        }
 
         return SyndFeedImpl().apply {
             feedType = "rss_2.0"
             title = "IMDB rating feed for $userId"
             link = buildUrl(userId)
             description = "This feed has been created using custom-rss tool"
-            entries = fetchAndParse(userId, Jsoup.parse(URL(buildUrl(userId)), 5000))
+            entries = fetchAndParse(userId, Jsoup.parse(html))
         }
     }
 }

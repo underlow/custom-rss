@@ -19,6 +19,8 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:${ktorVersion}")
     implementation("org.jsoup:jsoup:1.12.2")
     implementation("io.ktor:ktor-client-core:${ktorVersion}")
+    implementation("io.ktor:ktor-client-core-jvm:${ktorVersion}")
+    implementation("io.ktor:ktor-client-cio:${ktorVersion}")
     implementation("com.rometools:rome:1.12.2")
     implementation("ch.qos.logback:logback-classic:1.3.0-alpha5")
 
