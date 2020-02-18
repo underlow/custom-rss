@@ -1,0 +1,34 @@
+<configuration>
+
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+    <property name="LOG_DIRECTORY" value="./logs"/>
+    <property name="APP" value="deliveryManager"/>
+
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%date{dd-MM-YY HH:mm:ss.SSS} %-5level [%15thread] %logger{40} : %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="org.apache.http" level="INFO"/>
+    <logger name="net.sf.ehcache" level="INFO"/>
+    <logger name="com.zaxxer.hikari" level="INFO"/>
+    <logger name="springfox.documentation.spring" level="INFO"/>
+    <!--<logger name="org.mongodb.driver" level="TRACE"/>-->
+    <logger name="com.graphhopper.jsprit.core.algorithm" level="ERROR"/>
+    <logger name="com.graphhopper.jsprit.core.problem" level="ERROR"/>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

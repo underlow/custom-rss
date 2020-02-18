@@ -54,7 +54,7 @@ private fun Element.toSyndEntry(): SyndEntry? =
             this.uri = url
         }
     }.onFailure {
-        logger.error("Cannot parse $this")
+        logger.error("Cannot parse $this: $it")
     }.getOrNull()
 
 private val dateFormat = SimpleDateFormat("dd MMM yyyy")
