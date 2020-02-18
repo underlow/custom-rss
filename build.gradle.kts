@@ -28,6 +28,7 @@ application {
 }
 
 tasks.withType<Jar> {
+    archiveName = "application.jar"
     manifest {
         attributes(
             mapOf(
