@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "1.3.61"
     application
-    id("com.github.johnrengelman.shadow") version "5.0.0"
+    id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
 group = "me.underlow"
@@ -40,7 +40,7 @@ tasks.withType<Jar> {
 
 // required for heroku deploy
 tasks.register("stage") {
-    dependsOn("shadowJar")
+    dependsOn("clean", "shadowJar")
 }
 
 tasks {
