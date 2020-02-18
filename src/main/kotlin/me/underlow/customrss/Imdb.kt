@@ -2,6 +2,7 @@ package me.underlow.customrss
 
 import com.rometools.rome.feed.synd.*
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.net.URL
 import java.text.SimpleDateFormat
@@ -10,9 +11,7 @@ import java.text.SimpleDateFormat
 object Imdb {
     private fun buildUrl(userId: String) = "http://www.imdb.com/user/${userId}/ratings"
 
-    private fun fetchAndParse(userId: String): List<SyndEntry> {
-        val document = Jsoup.parse(URL(buildUrl(userId)), 5000)
-
+    fun fetchAndParse(userId: String, document: Document): List<SyndEntry> {
         val items = document.select("#ratings-container > .lister-item")
 
         logger.debug("Found ${items.size} items for $userId")
@@ -28,7 +27,7 @@ object Imdb {
             title = "IMDB rating feed for $userId"
             link = buildUrl(userId)
             description = "This feed has been created using custom-rss tool"
-            entries = fetchAndParse(userId)
+            entries = fetchAndParse(userId, Jsoup.parse(URL(buildUrl(userId)), 5000))
         }
     }
 }

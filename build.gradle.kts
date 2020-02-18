@@ -21,6 +21,10 @@ dependencies {
     implementation("io.ktor:ktor-client-core:${ktorVersion}")
     implementation("com.rometools:rome:1.12.2")
     implementation("ch.qos.logback:logback-classic:1.3.0-alpha5")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.1.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.1.1")
+
 }
 
 application {
