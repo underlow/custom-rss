@@ -55,7 +55,7 @@ private fun Element.toSyndEntry(): SyndEntry? =
 
         return@runCatching SyndEntryImpl().apply {
             this.title = title
-            this.link = link
+//            this.link = link
             this.description = SyndContentImpl().apply { value = description }
             this.publishedDate = date
             this.uri = url

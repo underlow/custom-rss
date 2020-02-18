@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory
 fun Application.main() {
     routing {
         imdbRoute()
+        drive2Route()
     }
 }
 
@@ -28,6 +29,21 @@ private fun Routing.imdbRoute() {
         }
 
         val feed = Imdb.fetch(userId.replace(".com", ""))
+
+        call.respondText(contentType = ContentType.Text.Xml) { writeFeedXml(feed) }
+    }
+}
+
+private fun Routing.drive2Route() {
+    get("/drive2/experience/{path...}") {
+        val path = call.parameters.getAll("path")?.joinToString("/")
+
+        if (path == null) {
+            call.respond(HttpStatusCode.BadRequest)
+            return@get
+        }
+
+        val feed = Drive2.fetch(path.replace(".com", ""))
 
         call.respondText(contentType = ContentType.Text.Xml) { writeFeedXml(feed) }
     }
