@@ -1,2 +1,2 @@
 
-web: java  -jar build/libs/application.jar -port=8080
+web: java  -jar build/libs/application.jar -port=$PORT
