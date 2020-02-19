@@ -19,12 +19,14 @@ class Drive2(path: String) : WebResource {
             val title = titleElement.text()
             val url = titleElement.attr("href")
             val content = select(".c-post-preview__lead").text()
-            val image = select(".c-preview-pic .o-img img")[0].attr("src")
-            val description = "<img src=${image}/><p>${content}</p>";
+//            images don't live long enough and don't appear in rss
+//            val imageDiv = select(".c-preview-pic .o-img img")
+//            val image = if (imageDiv.isNotEmpty()) imageDiv[0].attr("src") else null
+//            val description = image?.let { "<img src=${it}/><p>${content}</p>"; } ?: "<p>${content}</p>"
 
             return@runCatching SyndEntryImpl().apply {
                 this.title = title
-                this.description = SyndContentImpl().apply { value = description }
+                this.description = SyndContentImpl().apply { value = "<p>${content}</p>" }
                 this.link = "$baseUrl$url"
             }
         }.onFailure {
