@@ -10,7 +10,7 @@ import org.slf4j.Logger
 class Drive2(path: String) : WebResource {
 
     override val logger: Logger = loggerFor<Drive2>()
-    override val url: String = "${baseUrl}/experience/${path}"
+    override val url: String = "${baseUrl}/${path}"
     override val entriesSelector: String = ".l-page-columns > .g-column-mid > .js-entity"
 
     override fun Element.toSyndEntry(): SyndEntry? =

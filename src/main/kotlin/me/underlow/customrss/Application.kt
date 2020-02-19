@@ -35,7 +35,7 @@ private fun Routing.imdbRoute() {
 }
 
 private fun Routing.drive2Route() {
-    get("/drive2/experience/{path...}") {
+    get("/drive2/{path...}") {
         val path = call.parameters.getAll("path")?.joinToString("/")
 
         if (path == null) {
