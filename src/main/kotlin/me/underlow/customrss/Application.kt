@@ -28,9 +28,9 @@ private fun Routing.imdbRoute() {
             return@get
         }
 
-        val feed = Imdb.fetch(userId.replace(".com", ""))
+        val feed = Imdb(userId.replace(".com", ""))
 
-        call.respondText(contentType = ContentType.Text.Xml) { writeFeedXml(feed) }
+        call.respondText(contentType = ContentType.Text.Xml) { writeFeedXml(feed.fetch()) }
     }
 }
 
@@ -43,9 +43,9 @@ private fun Routing.drive2Route() {
             return@get
         }
 
-        val feed = Drive2.fetch(path.replace(".com", ""))
+        val feed = Drive2((path.replace(".com", "")))
 
-        call.respondText(contentType = ContentType.Text.Xml) { writeFeedXml(feed) }
+        call.respondText(contentType = ContentType.Text.Xml) { writeFeedXml(feed.fetch()) }
     }
 }
 
