@@ -16,7 +16,7 @@ class Drive2(path: String) : WebResource {
     override fun Element.toSyndEntry(): SyndEntry? =
         kotlin.runCatching {
             val titleElement = select(".c-link--text")
-            val title = titleElement.text()
+            val title = titleElement[0].text()
             val url = titleElement.attr("href")
             val content = select(".c-post-preview__lead").text()
 //            images don't live long enough and don't appear in rss
