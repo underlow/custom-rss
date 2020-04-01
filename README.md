@@ -3,7 +3,7 @@
 ## Supported sites: 
 
 ### User rating on imdb.com
-`http://example.com/imdb/[userId]` where user id is `ur1234567` in imdb url `https://www.imdb.com/user/ur12345678/ratings`
+`http://example.com/imdb/rating/[userId]` where user id is `ur1234567` in imdb url `https://www.imdb.com/user/ur12345678/ratings`
 
 ### drive2.ru
 
